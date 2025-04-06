@@ -27,7 +27,6 @@ class Solution(object):
             nums[left], nums[right] = nums[right], nums[left]
             left += 1
             right -= 1
-        return 
                     
 arr = [9, 1, 7, 6, 3]           
 Solution().nextPermutation(arr)
