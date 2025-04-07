@@ -43,4 +43,4 @@ class Solution(object):
 
 
 solution = Solution()
-print(solution.getPermutation(9, 960))
+print(solution.getPermutation(9, 480))
