@@ -11,31 +11,31 @@ class Solution(object):
         rows = len(board)
         cols = len(board[0])
         
-        def search(i, j, string):
+        def search(i, j, idx):
             temp = False
             visited_set.add((i, j))
             
-            if len(string) == 0:
+            if idx == len(word):
                 return True
             
-            if i > 0 and board[i - 1][j] == string[0] and (i - 1, j) not in visited_set:
-                temp = search(i - 1, j, string[1:])
-                if temp == True:
+            if i > 0 and board[i - 1][j] == word[idx] and (i - 1, j) not in visited_set:
+                temp = search(i - 1, j, idx + 1)
+                if temp:
                     return True
             
-            if i < rows - 1 and board[i + 1][j] == string[0] and (i + 1, j) not in visited_set:
-                temp = search(i + 1, j, string[1:])
-                if temp == True:
+            if i < rows - 1 and board[i + 1][j] == word[idx] and (i + 1, j) not in visited_set:
+                temp = search(i + 1, j, idx + 1)
+                if temp:
                     return True
             
-            if j > 0 and board[i][j - 1] == string[0] and (i, j - 1) not in visited_set:
-                temp = search(i, j - 1, string[1:])
-                if temp == True:
+            if j > 0 and board[i][j - 1] == word[idx] and (i, j - 1) not in visited_set:
+                temp = search(i, j - 1, idx + 1)
+                if temp:
                     return True
             
-            if j < cols - 1 and board[i][j + 1] == string[0] and (i, j + 1) not in visited_set:
-                temp = search(i, j + 1, string[1:])
-                if temp == True:
+            if j < cols - 1 and board[i][j + 1] == word[idx] and (i, j + 1) not in visited_set:
+                temp = search(i, j + 1, idx + 1)
+                if temp:
                     return True
             
             visited_set.remove((i, j))
@@ -46,8 +46,8 @@ class Solution(object):
         for row in range(rows):
             for col in range(cols):
                 if word[0] == board[row][col]:
-                    exists = search(row, col, word[1:])
-                    if exists == True:
+                    exists = search(row, col, 1)
+                    if exists:
                         return True
                     
         return existes
