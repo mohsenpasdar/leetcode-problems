@@ -9,37 +9,26 @@ class Solution(object):
         
         rows, cols = len(board), len(board[0])
         
-        def search(i, j, idx):
-            visited_set.add((i, j))
-            
+        def search(i, j, idx):         
             if idx == len(word):
                 return True
             
-            if i > 0 and board[i - 1][j] == word[idx] and (i - 1, j) not in visited_set:
-                if search(i - 1, j, idx + 1):
-                    return True
+            if i < 0 or i == rows or j < 0 or j == cols or (i, j) in visited_set or board[i][j] != word[idx]:
+                return False
             
-            if i < rows - 1 and board[i + 1][j] == word[idx] and (i + 1, j) not in visited_set:
-                if search(i + 1, j, idx + 1):
-                    return True
+            visited_set.add((i, j))
             
-            if j > 0 and board[i][j - 1] == word[idx] and (i, j - 1) not in visited_set:
-                if search(i, j - 1, idx + 1):
-                    return True
-            
-            if j < cols - 1 and board[i][j + 1] == word[idx] and (i, j + 1) not in visited_set:
-                if search(i, j + 1, idx + 1):
-                    return True
+            if search(i - 1, j, idx + 1) or search(i + 1, j, idx + 1) or search(i, j - 1, idx + 1) or search(i, j + 1, idx + 1):
+                return True
             
             visited_set.remove((i, j))
             return False
-            
         
         
         for row in range(rows):
             for col in range(cols):
                 if word[0] == board[row][col]:
-                    if search(row, col, 1):
+                    if search(row, col, 0):
                         return True
                     
         return False
