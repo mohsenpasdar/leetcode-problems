@@ -13,11 +13,11 @@ class Solution(object):
             if (r, c) in non_surroundeds:
                 return False
             
-            board[r][c] = "X"
-            temp.add((r, c))
-            
             if r == 0 or r == rows - 1 or c == 0 or c == cols -1:
                 return False
+            
+            board[r][c] = "X"
+            temp.add((r, c))
    
             if (board[r - 1][c] == "O" and not is_surrounded(r - 1, c)) or \
                 (board[r + 1][c] == "O" and not is_surrounded(r + 1, c)) or \
