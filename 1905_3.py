@@ -9,29 +9,26 @@ class Solution:
         rows, cols = len(grid2), len(grid2[0])
         
         def dfs_check_subisland(r, c):
-            subisland = True
-            
+                        
             if r < 0 or r >= rows or c < 0 or c >= cols or grid2[r][c] != 1:
-                return True
+                return [True]
             
             grid2[r][c] = 0
             
-            if subisland and grid1[r][c] == 0:
-                subisland = False
-            if not dfs_check_subisland(r - 1, c):
-                subisland = False
-            if not dfs_check_subisland(r + 1, c):
-                subisland = False
-            if not dfs_check_subisland(r, c - 1):
-                subisland = False
-            if not dfs_check_subisland(r, c + 1):
-                subisland = False
+            if subisland[0] and grid1[r][c] == 0:
+                subisland[0] = False
+                
+            dfs_check_subisland(r - 1, c)
+            dfs_check_subisland(r + 1, c)
+            dfs_check_subisland(r, c - 1) 
+            dfs_check_subisland(r, c + 1)
             
-            return subisland
+            return subisland[0]
         
         for row in range(rows):
             for col in range(cols):
                 if grid2[row][col] == 1 and grid1[row][col] == 1:
+                    subisland = [True]
                     if dfs_check_subisland(row, col):
                         count +=1
                     
