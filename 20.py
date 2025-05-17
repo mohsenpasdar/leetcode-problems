@@ -1,4 +1,4 @@
-class Solution:
+class Solution2:
     def isValid(self, s: str) -> bool:
         length = len(s)
         if length % 2 == 1: return False
@@ -28,6 +28,24 @@ class Solution:
             idx = temp_idx
         
         return True
-    
+  
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        match = {"()", "[]", "{}"}
+        
+        for c in s:
+            if not stack:
+                if c in ")]}": return False
+                stack.append(c) 
+            elif stack[-1] + c in match:
+                stack.pop()
+            elif stack[-1] in "({[" and c in ")}]":
+                return False
+            else: stack.append(c)
+        
+        return not stack
+        
 solution = Solution()
 print(solution.isValid("[[[]]]"))
