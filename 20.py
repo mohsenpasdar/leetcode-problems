@@ -41,7 +41,7 @@ class Solution:
                 stack.append(c) 
             elif stack[-1] + c in match:
                 stack.pop()
-            elif stack[-1] in "({[" and c in ")}]":
+            elif c in ")}]":
                 return False
             else: stack.append(c)
         
