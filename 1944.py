@@ -27,26 +27,24 @@ class Solution2:
 class Solution:
     def canSeePersonsCount(self, heights: List[int]) -> List[int]:
         length = len(heights)
-        res = [0]
-        stack = [heights[-1]]
-        maximum = heights[-1]
+        res = [0] * length
+        stack = []
+        maximum = 0
 
-        for i in reversed(range(length - 1)):
-            if heights[i] < stack[-1]:
-                res.append(1)
-            elif heights[i] > maximum:
-                res.append(len(stack))
-                stack = []
+        for i in reversed(range(length)):
+            if heights[i] > maximum:
+                res[i] = len(stack)
+                stack = [heights[i]]
                 maximum = heights[i]
             else:
                 count = 1
                 while heights[i] > stack[-1]:
                     stack.pop()
                     count += 1
-                res.append(count)
-
-            stack.append(heights[i])
-        return res[::-1]
+                res[i] = count
+                stack.append(heights[i])
+                
+        return res
     
 solution = Solution()
 print(solution.canSeePersonsCount([5,11,2,8,10]))
