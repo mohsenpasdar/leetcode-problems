@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution2:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         ans = [-1] * len(nums1)
         nums2_dic = {}
@@ -16,6 +16,23 @@ class Solution:
                     break
                     
         return ans
+
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        ans = [-1] * len(nums1)
+        stack = []        
+        index_map = { num: idx for idx, num in enumerate(nums1)}
+            
+        for num in reversed(nums2):
+            while stack and num > stack[-1]:
+                stack.pop()
+            
+            if num in index_map:
+                ans[index_map[num]] = stack[-1] if stack else -1
+            
+            stack.append(num)
+                   
+        return ans
     
 solution = Solution()
-print(solution.nextGreaterElement([2,4,3], [1,2,3,4]))
+print(solution.nextGreaterElement([4,1,2], [1,3,4,2]))
