@@ -7,10 +7,7 @@ class Solution:
         
         for current_str in strs:
             sorted_str = ''.join(sorted(current_str))
-            if sorted_str in anagram_groups:
-                anagram_groups[sorted_str].append(current_str)
-            else:
-                anagram_groups[sorted_str] = [current_str]
+            anagram_groups[sorted_str] = anagram_groups.get(sorted_str, []) + [current_str]
 
         return list(anagram_groups.values())
     
